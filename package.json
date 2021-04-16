@@ -1,0 +1,16 @@
+{
+  "name": "node-basic-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "update-d":"ncu"
+  },
+  "author": "jscalderon65",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
+}
