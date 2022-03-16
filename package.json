@@ -4,7 +4,7 @@
   "description": "Basic template for node projects.",
   "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "dev": "nodemon -r dotenv/config src/index.js",
     "udp": "ncu"
   },
   "author": "jscalderon65",
@@ -12,9 +12,13 @@
   "homepage": "https://github.com/jscalderon65/node-basic-template",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "nodemon": "^2.0.7",
-    "npm-check-updates": "^11.8.5"
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "jsdom": "^19.0.0",
+    "morgan": "^1.10.0",
+    "node-cron": "^3.0.0",
+    "nodemon": "^2.0.15",
+    "npm-check-updates": "^12.5.3",
+    "puppeteer": "^13.5.1"
   }
 }
