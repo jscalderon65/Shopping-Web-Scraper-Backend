@@ -1,15 +1,14 @@
 {
-  "name": "node-basic-template",
+  "name": "shopping-web-scraper-backend",
   "version": "2.0.0",
-  "description": "Basic template for node projects.",
+  "description": "Shopping web scraper backend",
   "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon -r dotenv/config src/index.js",
-    "udp": "ncu"
+    "dev": "nodemon -r dotenv/config src/index.js"
   },
   "author": "jscalderon65",
   "license": "ISC",
-  "homepage": "https://github.com/jscalderon65/node-basic-template",
+  "homepage": "https://github.com/jscalderon65/Shopping-web-scraper",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
