@@ -4,7 +4,8 @@
   "description": "Shopping web scraper backend",
   "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon -r dotenv/config src/index.js"
+    "dev": "nodemon -r dotenv/config src/index.js",
+    "dev2": "node -r dotenv/config src/pruebas.js"
   },
   "author": "jscalderon65",
   "license": "ISC",
