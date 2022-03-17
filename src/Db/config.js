@@ -5,4 +5,4 @@ firebase.initializeApp({
   credential: firebase.credential.cert(serviceAccount),
 })
 const db = getFirestore()
-module.exports = {db}
+module.exports = db

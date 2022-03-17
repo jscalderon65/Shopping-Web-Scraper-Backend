@@ -1,3 +1,4 @@
+const debugAppError = require('debug')('app:error')
 const puppeteer = require('puppeteer')
 const jsdom = require('jsdom')
 
@@ -6,15 +7,12 @@ const getWebSiteSourceCode = async (url) => {
     const browser = await puppeteer.launch(/* {headless: false} */)
     const page = await browser.newPage()
     await page.setViewport({width: 1920, height: 1080})
-    const response = await page.goto(url, [
-      1000,
-      {waitUntil: 'domcontentloaded'},
-    ])
+    const response = await page.goto(url)
     const body = await response.text()
     await browser.close()
     return body
-  } catch (error) {
-    return error
+  } catch (e) {
+    debugAppError(e)
   }
 }
 
@@ -28,8 +26,9 @@ const getKoajProductInfo = (webSiteSourceCode) => {
       .getElementById('our_price_display')
       .textContent.trim()
     return {name, actualPrice}
-  } catch (error) {
-    return error
+  } catch (e) {
+    debugAppError(e)
+    throw new Error(e)
   }
 }
 

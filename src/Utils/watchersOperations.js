@@ -1,4 +1,5 @@
-const {createProduct} = require('./crudProductsOperations')
+const debugAppError = require('debug')('app:error')
+const {createProduct} = require('./crudInWatchersOperations')
 const {getWebSiteSourceCode, getKoajProductInfo} = require('./puppeteerUtils')
 const {isUrlStatusValid} = require('./errorHandlers')
 const createWatcherInKoajProduct = async (productUrl) => {
@@ -10,10 +11,11 @@ const createWatcherInKoajProduct = async (productUrl) => {
       const newProduct = createProduct(name, actualPrice, productUrl)
       return newProduct
     } else {
-      throw Error('Troubles registering watcher')
+      throw new Error('Troubles registering watcher')
     }
-  } catch (error) {
-    return error
+  } catch (e) {
+    debugAppError(e)
+    throw new Error(e)
   }
 }
 
