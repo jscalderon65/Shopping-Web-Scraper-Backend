@@ -38,7 +38,7 @@ const setElementToDocument = async (
     const dbRef = db.collection(collectionId).doc(docId)
     const response = await dbRef.set(
       {
-        [propertyId]: newElement,
+        [propertyId]: {...newElement, id: propertyId, user: docId},
       },
       {merge: true},
     )
@@ -64,9 +64,27 @@ const DeleteElementInDocument = async (collectionId, docId, propertyId) => {
   }
 }
 
+const getCronInfo = async (collectionId) => {
+  try {
+    const arrayData = []
+    const snapshot = await db.collection(collectionId).get()
+    snapshot.docs.map((doc) => {
+      for (let item in doc.data()) {
+        arrayData.push({...doc.data()[item]})
+      }
+    })
+    debug('Collection data finished')
+    return arrayData
+  } catch (error) {
+    debugDbError(error)
+    throw new Error(error)
+  }
+}
+
 module.exports = {
   isDbReferenceExist,
   setElementToDocument,
   getElementsFromDocument,
   DeleteElementInDocument,
+  getCronInfo,
 }

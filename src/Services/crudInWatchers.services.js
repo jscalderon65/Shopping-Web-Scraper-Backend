@@ -3,7 +3,7 @@ const {
   getElementsFromDocument,
   DeleteElementInDocument,
 } = require('../Utils/dbOperations')
-const {createWatcher} = require('../Utils/watchersOperations')
+const {watcherMethods} = require('../Utils/watchersOperations')
 const {v4: uuidv4} = require('uuid')
 const debugAppError = require('debug')('app:error')
 const collectionId = 'watchers'
@@ -11,8 +11,9 @@ const createWatcherInProduct = async (req, res) => {
   try {
     const {userId, productBrand} = req.params
     const {productUrl} = req.body
+    const method = 'CREATE_WATCHER'
     const IdWatcher = uuidv4()
-    const newProduct = await createWatcher(productBrand, productUrl)
+    const newProduct = await watcherMethods(productUrl, productBrand, method)
     await setElementToDocument(collectionId, userId, IdWatcher, newProduct)
     res.send({[IdWatcher]: newProduct})
   } catch (e) {

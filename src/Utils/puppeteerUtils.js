@@ -7,7 +7,10 @@ const getWebSiteSourceCode = async (url) => {
     const browser = await puppeteer.launch(/* {headless: false} */)
     const page = await browser.newPage()
     await page.setViewport({width: 1920, height: 1080})
-    const response = await page.goto(url)
+    const response = await page.goto(url, {
+      waitUntil: 'load',
+      timeout: 0,
+    })
     const body = await response.text()
     await browser.close()
     return body
@@ -25,7 +28,7 @@ const getKoajProductInfo = (webSiteSourceCode) => {
     const actualPrice = document
       .getElementById('our_price_display')
       .textContent.trim()
-    return {name, actualPrice}
+    return {name, actualPrice, brand: 'Koaj'}
   } catch (e) {
     debugAppError(e)
     throw new Error(e)
