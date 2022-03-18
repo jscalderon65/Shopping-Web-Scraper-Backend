@@ -60,7 +60,7 @@ const updateElementToDocument = async (
     const dbRef = db.collection(collectionId).doc(docId)
     const response = await dbRef.update(
       {
-        [propertyId]: {tags: newTags},
+        [`${propertyId}.tags`]: newTags,
       },
       {merge: true},
     )
