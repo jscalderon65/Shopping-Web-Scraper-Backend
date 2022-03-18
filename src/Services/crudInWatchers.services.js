@@ -1,6 +1,7 @@
 const {
   setElementToDocument,
   getElementsFromDocument,
+  DeleteElementInDocument,
 } = require('../Utils/dbOperations')
 const {createWatcher} = require('../Utils/watchersOperations')
 const {v4: uuidv4} = require('uuid')
@@ -29,4 +30,20 @@ const getUserWatchers = async (req, res) => {
     debugAppError(e)
   }
 }
-module.exports = {createWatcherInProduct, getUserWatchers}
+
+const deleteUserWatchers = async (req, res) => {
+  try {
+    const {userId} = req.params
+    const {productId} = req.body
+    const response = await DeleteElementInDocument(
+      collectionId,
+      userId,
+      productId,
+    )
+    res.send(response)
+  } catch (e) {
+    res.status(500).send({error: e.message})
+    debugAppError(e)
+  }
+}
+module.exports = {createWatcherInProduct, getUserWatchers, deleteUserWatchers}

@@ -1,4 +1,4 @@
-const db = require('../Db/config')
+const {db, FieldValue} = require('../Db/config')
 const debug = require('debug')('firebase:firestore')
 const debugDbError = require('debug')('firebase:error')
 
@@ -42,9 +42,21 @@ const setElementToDocument = async (
       },
       {merge: true},
     )
-    debug(
-      'Document successfully written, in route: ' + collectionId + '/' + docId,
-    )
+    debug('Field successfully written, in route: ' + collectionId + '/' + docId)
+    return response
+  } catch (error) {
+    debugDbError(error)
+    throw new Error(error)
+  }
+}
+
+const DeleteElementInDocument = async (collectionId, docId, propertyId) => {
+  try {
+    const dbRef = db.collection(collectionId).doc(docId)
+    const response = await dbRef.update({
+      [propertyId]: FieldValue.delete(),
+    })
+    debug('Field successfully deleted, in route: ' + collectionId + '/' + docId)
     return response
   } catch (error) {
     debugDbError(error)
@@ -56,4 +68,5 @@ module.exports = {
   isDbReferenceExist,
   setElementToDocument,
   getElementsFromDocument,
+  DeleteElementInDocument,
 }
