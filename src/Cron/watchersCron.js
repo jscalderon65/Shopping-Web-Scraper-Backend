@@ -3,7 +3,7 @@ const {watcherMethods} = require('../Utils/watchersOperations')
 const {setElementToDocument} = require('../Utils/dbOperations')
 const debug = require('debug')('app:cron')
 const debugError = require('debug')('app:cron:error')
-const collection = 'watchers'
+const collection = process.env.DB_WATCHERS_COLLECTION
 
 const updateInDbWatchersInfo = async (newWatcher, oldWatcher) => {
   const {priceHistory, actualPrice: oldActualPrice} = oldWatcher
@@ -46,5 +46,4 @@ const updateWatchersInfo = async () => {
     throw new Error(e)
   }
 }
-updateWatchersInfo()
 module.exports = {updateWatchersInfo}

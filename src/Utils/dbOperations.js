@@ -50,6 +50,28 @@ const setElementToDocument = async (
   }
 }
 
+const updateElementToDocument = async (
+  collectionId,
+  docId,
+  propertyId,
+  newTags,
+) => {
+  try {
+    const dbRef = db.collection(collectionId).doc(docId)
+    const response = await dbRef.update(
+      {
+        [propertyId]: {tags: newTags},
+      },
+      {merge: true},
+    )
+    debug('Field successfully updated, in route: ' + collectionId + '/' + docId)
+    return response
+  } catch (error) {
+    debugDbError(error)
+    throw new Error(error)
+  }
+}
+
 const DeleteElementInDocument = async (collectionId, docId, propertyId) => {
   try {
     const dbRef = db.collection(collectionId).doc(docId)
@@ -87,4 +109,5 @@ module.exports = {
   getElementsFromDocument,
   DeleteElementInDocument,
   getCronInfo,
+  updateElementToDocument,
 }
