@@ -1,12 +1,9 @@
 const app = require('./server')
 const debug = require('debug')('app')
-const cron = require('node-cron')
-const {updateWatchersInfo} = require('./Cron/watchersCron')
+const {cronHandler} = require('./Cron/cronHandler')
 
-/* cron.schedule(process.env.CRON_STRING, () => {
-  updateWatchersInfo()
-})
- */
+cronHandler()
+
 app.listen(app.get('port'), (req, res) => {
   debug('server on port: ', app.get('port'))
 })

@@ -12,6 +12,7 @@
 ## Configuration ⚙️
 > .env
 ``` 
+NODE_ENV
 DB_WATCHERS_COLLECTION=
 CRON_STRING=
 ```
