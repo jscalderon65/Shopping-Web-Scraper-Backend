@@ -4,14 +4,15 @@
   "description": "Shopping web scraper backend",
   "main": "src/index.js",
   "scripts": {
-    "start":"set DEBUG=app*,firebase* && node  -r dotenv/config src/index.js",
+    "start": "set DEBUG=app*,firebase* && node  -r dotenv/config src/index.js",
     "dev": "set DEBUG=app*,firebase* && nodemon -r dotenv/config src/index.js",
-    "cron":"set DEBUG=app*,firebase* && node src/Cron/watchersCron.js"
+    "cron": "set DEBUG=app*,firebase* && node src/Cron/watchersCron.js"
   },
   "author": "jscalderon65",
   "license": "ISC",
   "homepage": "https://github.com/jscalderon65/Shopping-web-scraper",
   "dependencies": {
+    "@sendgrid/mail": "^7.6.2",
     "axios": "^0.26.1",
     "cors": "^2.8.5",
     "debug": "^4.3.4",
