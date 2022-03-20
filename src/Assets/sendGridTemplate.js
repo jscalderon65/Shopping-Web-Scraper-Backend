@@ -174,14 +174,14 @@ module.exports = {
                                         direction: ltr;
                                         font-weight: 700;
                                         letter-spacing: normal;
-                                        margin-top: 0;
+                                        margin-top: 30px;
                                         margin-bottom: 0;
                                       "
                                     >
                                       <span
                                         class="tinyMce-placeholder"
                                         style="color: #fefeff"
-                                        >Revisa el producto de ${brand} 📣</span
+                                        >Revisa tu producto de ${brand} 📣</span
                                       >
                                     </h1>
                                   </td>
