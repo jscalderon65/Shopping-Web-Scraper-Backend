@@ -1,5 +1,5 @@
 const sgMail = require('@sendgrid/mail')
-const debug = 'debug'('app:sendGrid')
+const debug = require('debug')('app:sendGrid')
 const debugAppError = require('debug')('app:error')
 const {sendGridTemplate} = require('../Assets/sendGridTemplate')
 const EmailWatcherAlertSubject = process.env.SEND_GRID_SUBJECT
@@ -29,7 +29,7 @@ const sendWatcherAlertEmail = async (
       ),
     }
     await sgMail.send(msg)
-    debug('Email sent')
+    debug('Email to: ', to, ' sent...')
   } catch (e) {
     debugAppError(e)
     throw new Error(e)

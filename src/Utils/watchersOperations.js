@@ -3,13 +3,19 @@ const {getWebSiteSourceCode, getKoajProductInfo} = require('./puppeteerUtils')
 const {isUrlStatusValid} = require('./errorHandlers')
 const debugAppError = require('debug')('app:error')
 
-const createWatcherInKoajProduct = async (productUrl) => {
+const createWatcherInKoajProduct = async (productUrl, userEmail) => {
   try {
     const urlValidation = await isUrlStatusValid(productUrl)
     if (urlValidation) {
       const body = await getWebSiteSourceCode(productUrl)
       const {name, actualPrice, brand} = getKoajProductInfo(body)
-      const newProduct = createProduct(productUrl, name, actualPrice, brand)
+      const newProduct = createProduct(
+        productUrl,
+        name,
+        actualPrice,
+        brand,
+        userEmail,
+      )
       return newProduct
     } else {
       throw new Error('Troubles registering watcher')
@@ -38,12 +44,15 @@ const updateWatcherInKoajProduct = async (productUrl, oldInfo) => {
   }
 }
 
-const watcherMethods = async (productUrl, brand, method, oldInfo = {}) => {
+const watcherMethods = async (payload) => {
+  const {productUrl, brand, method} = payload
   switch (brand) {
     case 'Koaj':
       if (method === 'CREATE_WATCHER') {
-        return await createWatcherInKoajProduct(productUrl)
+        const {userEmail} = payload
+        return await createWatcherInKoajProduct(productUrl, userEmail)
       } else if (method === 'UPDATE_WATCHER_INFO') {
+        const {oldInfo} = payload
         return await updateWatcherInKoajProduct(productUrl, oldInfo)
       }
     default:

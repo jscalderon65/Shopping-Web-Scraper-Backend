@@ -13,10 +13,16 @@ const collectionId = process.env.DB_WATCHERS_COLLECTION
 const createWatcherInProduct = async (req, res) => {
   try {
     const {userId, productBrand} = req.params
-    const {productUrl} = req.body
+    const {productUrl, userEmail} = req.body
     const method = 'CREATE_WATCHER'
     const IdWatcher = uuidv4()
-    const newProduct = await watcherMethods(productUrl, productBrand, method)
+    const watcherMethodsPayload = {
+      productUrl,
+      brand: productBrand,
+      method,
+      userEmail,
+    }
+    const newProduct = await watcherMethods(watcherMethodsPayload)
     await setElementToDocument(collectionId, userId, IdWatcher, newProduct)
     res.send({[IdWatcher]: newProduct})
   } catch (e) {

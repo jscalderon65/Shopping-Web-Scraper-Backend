@@ -4,6 +4,7 @@ const createProduct = (
   name,
   actualPrice,
   brand,
+  userEmail,
   productImage = '',
 ) => ({
   name,
@@ -13,6 +14,7 @@ const createProduct = (
   productImage,
   brand,
   tags: [],
+  userEmail,
   registrationDate: moment().format('MM/DD/YYYY HH:mm:ss'),
 })
 
