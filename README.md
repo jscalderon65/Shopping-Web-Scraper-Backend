@@ -8,9 +8,18 @@
 
 </div>
 
+<hr/>
 
-## Configuration ⚙️
-> .env
+## _Descripción_
+<p>
+Api dedicada a informar y notificar el cambio de precios de productos en tiendas virtuales.
+El producto que se desee vigilar se deberá registrar por medio de los métodos de la Api y una vez terminado dicho el proceso, la Api se encargará de notificar por medio de correo electrónico los cambios que se puedan presentar en los precios del producto.
+</p>
+
+<hr/>
+
+## _Configuración_
+> **.env**
 ``` 
 NODE_ENV=
 DB_WATCHERS_COLLECTION=
@@ -19,3 +28,8 @@ SEND_GRID_SUBJECT=
 SEND_GRID_API_KEY=
 SEND_GRID_SENDER=
 ```
+
+<hr/>
+
+## Autor ⌨️
+- **jscalderon65**
