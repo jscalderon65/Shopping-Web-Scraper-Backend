@@ -15,6 +15,7 @@ const createProduct = (
   brand,
   tags: [],
   userEmail,
+  counterAccessErrors: 0,
   registrationDate: moment().format('MM/DD/YYYY HH:mm:ss'),
 })
 

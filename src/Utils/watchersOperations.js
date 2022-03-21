@@ -6,9 +6,10 @@ const {
   getAdidasProductInfo,
   getSevenAndSevenProductInfo,
 } = require('./puppeteerUtils')
+const {setElementToDocument} = require('./dbOperations')
 const {isUrlStatusValid} = require('./errorHandlers')
 const debugAppError = require('debug')('app:error')
-
+const collection = process.env.DB_WATCHERS_COLLECTION
 const createWatcherInKoajProduct = async (productUrl, userEmail) => {
   try {
     const urlValidation = await isUrlStatusValid(productUrl)
@@ -41,6 +42,9 @@ const updateWatcherInKoajProduct = async (productUrl, oldInfo) => {
       return updatedProduct
     } else {
       debugAppError('Not valid url')
+      const {user, id} = oldInfo
+      oldInfo.counterAccessErrors = oldInfo.counterAccessErrors + 1
+      await setElementToDocument(collection, user, id, oldInfo)
       return oldInfo
     }
   } catch (e) {
@@ -82,6 +86,9 @@ const updateWatcherInBershkaProduct = async (productUrl, oldInfo) => {
       return updatedProduct
     } else {
       debugAppError('Not valid url')
+      const {user, id} = oldInfo
+      oldInfo.counterAccessErrors = oldInfo.counterAccessErrors + 1
+      await setElementToDocument(collection, user, id, oldInfo)
       return oldInfo
     }
   } catch (e) {
@@ -123,6 +130,9 @@ const updateWatcherInAdidasProduct = async (productUrl, oldInfo) => {
       return updatedProduct
     } else {
       debugAppError('Not valid url')
+      const {user, id} = oldInfo
+      oldInfo.counterAccessErrors = oldInfo.counterAccessErrors + 1
+      await setElementToDocument(collection, user, id, oldInfo)
       return oldInfo
     }
   } catch (e) {
@@ -163,6 +173,9 @@ const updateWatcherInSevenAndSevenProduct = async (productUrl, oldInfo) => {
       return updatedProduct
     } else {
       debugAppError('Not valid url')
+      const {user, id} = oldInfo
+      oldInfo.counterAccessErrors = oldInfo.counterAccessErrors + 1
+      await setElementToDocument(collection, user, id, oldInfo)
       return oldInfo
     }
   } catch (e) {
