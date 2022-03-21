@@ -1,6 +1,6 @@
 # Shopping web scrapper
 
-<div style="text-align:center;">
+<div align="center">
 
 ![Node.js](https://img.shields.io/badge/-Node.js-333333?style=flat&logo=node.js)
 ![Express.js](https://img.shields.io/badge/-Express.js-333333?style=flat&logo=express)
