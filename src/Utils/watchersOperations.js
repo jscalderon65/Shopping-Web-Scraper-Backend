@@ -15,13 +15,14 @@ const createWatcherInKoajProduct = async (productUrl, userEmail) => {
     const urlValidation = await isUrlStatusValid(productUrl)
     if (urlValidation) {
       const body = await getWebSiteSourceCode(productUrl)
-      const {name, actualPrice, brand} = getKoajProductInfo(body)
+      const {name, actualPrice, brand, productImage} = getKoajProductInfo(body)
       const newProduct = createProduct(
         productUrl,
         name,
         actualPrice,
         brand,
         userEmail,
+        productImage,
       )
       return newProduct
     } else {
@@ -58,13 +59,15 @@ const createWatcherInBershkaProduct = async (productUrl, userEmail) => {
     const urlValidation = await isUrlStatusValid(productUrl)
     if (urlValidation) {
       const body = await getWebSiteSourceCode(productUrl)
-      const {name, actualPrice, brand} = getBershkaProductInfo(body)
+      const {name, actualPrice, brand, productImage} =
+        getBershkaProductInfo(body)
       const newProduct = createProduct(
         productUrl,
         name,
         actualPrice,
         brand,
         userEmail,
+        productImage,
       )
       return newProduct
     } else {

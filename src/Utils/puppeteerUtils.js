@@ -4,14 +4,14 @@ const jsdom = require('jsdom')
 
 const getWebSiteSourceCode = async (url) => {
   try {
-    const browser = await puppeteer.launch(/* {headless: false} */)
+    const browser = await puppeteer.launch()
     const page = await browser.newPage()
     await page.setViewport({width: 1920, height: 1080})
     await page.setUserAgent(
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36',
     )
     const response = await page.goto(url, {
-      waitUntil: 'load',
+      waitUntil: 'domcontentloaded',
       timeout: 0,
     })
     const body = await response.text()
@@ -31,7 +31,10 @@ const getKoajProductInfo = (webSiteSourceCode) => {
     const actualPrice = document
       .getElementById('our_price_display')
       .textContent.trim()
-    return {name, actualPrice, brand: 'Koaj'}
+    const productImage = document
+      .querySelector('.replace-2x .img-responsive')
+      .getAttribute('src')
+    return {name, actualPrice, brand: 'Koaj', productImage}
   } catch (e) {
     debugAppError(e)
     throw new Error(e)
@@ -42,12 +45,15 @@ const getBershkaProductInfo = (webSiteSourceCode) => {
   try {
     const {
       window: {document},
-    } = new jsdom.JSDOM(webSiteSourceCode)
+    } = new jsdom.JSDOM(webSiteSourceCode, {includeNodeLocations: true})
     const name = document.querySelector('.product-title').textContent.trim()
     const actualPrice = document
       .querySelector('.current-price-elem')
       .textContent.trim()
-    return {name, actualPrice, brand: 'Bershka'}
+    const productImage = document
+      .querySelector('.image-item')
+      .getAttribute('data-original')
+    return {name, actualPrice, brand: 'Bershka', productImage}
   } catch (e) {
     debugAppError(e)
     throw new Error(e)
@@ -89,6 +95,8 @@ const getSevenAndSevenProductInfo = (webSiteSourceCode) => {
     const actualPrice = document
       .querySelector('.skuBestPrice')
       .textContent.trim()
+    const productImage = document.querySelector('.jqzoom')
+    console.log('--------->', productImage)
     return {
       name,
       actualPrice,

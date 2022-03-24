@@ -19,15 +19,9 @@ const createProduct = (
   registrationDate: moment().format('MM/DD/YYYY HH:mm:ss'),
 })
 
-const updateProductInfo = (
-  oldInfo,
-  newPrice,
-  newPriceHistory,
-  newproductImage = '',
-) => ({
+const updateProductInfo = (oldInfo, newPrice, newPriceHistory) => ({
   ...oldInfo,
   priceHistory: newPriceHistory,
   actualPrice: newPrice,
-  productImage: newproductImage,
 })
 module.exports = {createProduct, updateProductInfo}
