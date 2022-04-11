@@ -42,7 +42,14 @@ const setElementToDocument = async (
       },
       {merge: true},
     )
-    debug('Field successfully written, in route: ' + collectionId + '/' + docId)
+    debug(
+      'Field successfully written, in route: ' +
+        collectionId +
+        '/' +
+        docId +
+        ': ' +
+        propertyId,
+    )
     return response
   } catch (error) {
     debugDbError(error)
